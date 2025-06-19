@@ -30,7 +30,6 @@
 *   **前端**: HTML, CSS, JavaScript (原生，无框架)
 *   **数据格式**: Markdown (`.md`)
 ##  项目结构
-.
 ├── backend/
 │   ├── app.py             # Flask 后端应用
 │   └── requirements.txt   # Python 依赖列表
@@ -41,7 +40,6 @@
 ├── README.md              # 本说明文件
 └── start_app.bat          # Windows 启动脚本
 
-<TEXT>
 ##  环境准备与启动
 1.  **安装 Python**: 确保你已安装 Python 3.7 或更高版本，并已将其添加到系统环境变量 `PATH` 中。
 2.  **克隆或下载项目**: 获取本项目所有文件。
