@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galgame 资源管理器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Galgame 资源管理器</h1>
+        </header>
+
+        <main class="main-content">
+            <aside class="sidebar">
+                <h2>筛选与排序</h2>
+                <div class="filter-group search-group">
+                    <label for="searchInput">关键词搜索：</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="searchInput" placeholder="输入后按回车或点按钮搜索...">
+                        <button id="searchBtn" aria-label="执行搜索">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label for="sortOrder">排序方式：</label>
+                    <select id="sortOrder">
+                        <option value="title_display_asc">标题 (A-Z)</option>
+                        <option value="title_display_desc">标题 (Z-A)</option>
+                        <option value="release_date_desc">发售日期 (最新)</option>
+                        <option value="release_date_asc">发售日期 (最早)</option>
+                        <option value="duration_hours_desc">时长 (长-短)</option>
+                        <option value="duration_hours_asc">时长 (短-长)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterDeveloper">开发商：</label>
+                    <select id="filterDeveloper">
+                        <option value="">所有开发商</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterDurationTier">时长分级：</label>
+                    <select id="filterDurationTier">
+                        <option value="">所有时长</option>
+                        <option value="超短篇">超短篇 (&lt;5h)</option>
+                        <option value="短篇">短篇 (5-10h)</option>
+                        <option value="中篇">中篇 (10-30h)</option>
+                        <option value="长篇">长篇 (30-50h)</option>
+                        <option value="超长篇">超长篇 (&gt;50h)</option>
+                        <option value="未知时长">未知时长</option>
+                    </select>
+                </div>
+                 <div class="filter-group">
+                    <label for="filterSeries">游戏系列：</label>
+                    <select id="filterSeries">
+                        <option value="">所有系列</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="filterFavorites">
+                        <span class="custom-checkbox"></span>
+                        仅显示收藏
+                    </label>
+                </div>
+                <div class="filter-group">
+                    <button id="clearFiltersBtn" class="clear-filters-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M19.79 4.21a1.5 1.5 0 0 0-2.12 0L12 9.88 6.33 4.21a1.5 1.5 0 0 0-2.12 2.12L9.88 12l-5.67 5.67a1.5 1.5 0 0 0 2.12 2.12L12 14.12l5.67 5.67a1.5 1.5 0 0 0 2.12-2.12L14.12 12l5.67-5.67a1.5 1.5 0 0 0 0-2.12z"/></svg>
+                        清空筛选
+                    </button>
+                </div>
+            </aside>
+
+            <section class="content-area">
+                <div id="statusMessage" class="status" aria-live="polite"></div>
+                <div id="gamesList" class="games-grid">
+                    <!-- 游戏卡片将动态插入此处 -->
+                </div>
+                <div id="paginationControls" class="pagination-controls">
+                    <!-- 分页按钮将插入此处 -->
+                </div>
+            </section>
+        </main>
+
+        <div class="settings-fab" id="settingsFab" title="设置文件夹路径" aria-label="打开文件夹路径设置">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.68,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+        </div>
+        <div class="folder-path-container" id="folderPathContainer">
+            <label for="folderPath">MD文件夹路径 (绝对路径)：</label>
+            <input type="text" id="folderPath" placeholder="例如：C:\games 或 /path/to/games">
+            <button id="loadGamesBtn">加载资源</button>
+            <p class="path-hint">输入本地MD文件所在文件夹的绝对路径。</p>
+            <button id="hideFolderPathBtn" class="hide-btn" title="隐藏路径设置" aria-label="隐藏文件夹路径设置">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="gameDetailModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <div id="modalBody" role="document">
+                <!-- Detailed game info will be injected here -->
+            </div>
+            <div id="modalLoader" class="modal-loader" style="display:none;">正在加载详情...</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
