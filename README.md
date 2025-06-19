@@ -82,4 +82,4 @@
 *   `.md` 文件的格式需要符合后端 `app.py` 中 `parse_markdown_file_content` 函数的解析逻辑，特别是 Front Matter 和各个二级标题（如 `## 游戏封面`, `## 游戏名称`, `## 游戏信息` 等）下的内容组织。
 *   目前收藏夹数据存储在浏览器的 Local Storage 中，清除浏览器数据会导致收藏丢失。
 *   后端对路径中的 `..` 进行了基本的安全检查，以防止路径遍历攻击。
- ![你看不见我](https://rpic.origz.com/api.php?category=pixiv "TEST")
+ ![你看不见我](https://rpic.origz.com/api.php?category=pixiv)
