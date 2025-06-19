@@ -1,8 +1,13 @@
 # GalgameMDManager Galgame 资源管理器
 一个简单的 Markdown 文件资源管理和检索工具，专注于 Galgame 信息的整理与展示。
 本项目使用 Python Flask 作为后端，纯 HTML, CSS, JavaScript 作为前端，实现了前后端分离的架构。
+当然，也可以修改一下关键词作为其他领域的信息整理工具
+为什么做gal管理器呢？因为我刚好拿到了一大坨galgame资料，急需整理
 ##  特别感谢
-本项目的 Markdown 资源格式及部分内容灵感来源于 [ADV3-source](https://github.com/ACG-3/ADV3-source) 资源库。非常感谢其维护者和贡献者们整理的宝贵数据！
+本项目的 Markdown 资源格式及部分内容灵感来源于 [ADV3-source](https://github.com/ACG-3/ADV3-source) 资源库。非常感谢其维护者和贡献者们整理的宝贵数据！你也可以从他们那里拿到galgame资源
+感谢ai酱百忙之中抽时间给我写代码修bug，以及帮我水注释
+##  展示图
+![image](test.png)
 ##  主要功能
 *   **动态加载**: 用户可在前端界面设置本地 Markdown 文件（`.md`）所在的文件夹绝对路径。
 *   **数据解析**: 后端自动解析指定文件夹内所有 `.md` 文件的 Front Matter 和特定格式的正文内容。
@@ -30,6 +35,7 @@
 *   **前端**: HTML, CSS, JavaScript (原生，无框架)
 *   **数据格式**: Markdown (`.md`)
 ##  项目结构
+```
 ├── backend/
 │   ├── app.py             # Flask 后端应用
 │   └── requirements.txt   # Python 依赖列表
@@ -39,7 +45,7 @@
 │   └── style.css          # 前端样式表
 ├── README.md              # 本说明文件
 └── start_app.bat          # Windows 启动脚本
-
+```
 ##  环境准备与启动
 1.  **安装 Python**: 确保你已安装 Python 3.7 或更高版本，并已将其添加到系统环境变量 `PATH` 中。
 2.  **克隆或下载项目**: 获取本项目所有文件。
@@ -76,3 +82,4 @@
 *   `.md` 文件的格式需要符合后端 `app.py` 中 `parse_markdown_file_content` 函数的解析逻辑，特别是 Front Matter 和各个二级标题（如 `## 游戏封面`, `## 游戏名称`, `## 游戏信息` 等）下的内容组织。
 *   目前收藏夹数据存储在浏览器的 Local Storage 中，清除浏览器数据会导致收藏丢失。
 *   后端对路径中的 `..` 进行了基本的安全检查，以防止路径遍历攻击。
+ ![你看不见我](https://rpic.origz.com/api.php?category=pixiv "TEST")
